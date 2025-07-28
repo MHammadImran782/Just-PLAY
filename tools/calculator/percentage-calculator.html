@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online percentage calculator. Calculate percentages, percentage increase/decrease, and percentage of a number.">
+    <meta name="keywords" content="percentage calculator, percent calculator, percentage increase, percentage decrease">
+    <title>Percentage Calculator - Calculate Percentages Online | Multi-Tools</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="row mt-4">
+            <!-- Main Tool Area -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>% Percentage Calculator</h1>
+                        <p>Calculate percentages, percentage increase/decrease, and more</p>
+                    </div>
+                    <div class="card-body">
+                        <!-- Calculator Modes -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label">Choose Calculation Type:</label>
+                                    <select id="calc-mode" class="form-control form-select">
+                                        <option value="basic">What is X% of Y?</option>
+                                        <option value="percentage-of">X is what percent of Y?</option>
+                                        <option value="increase">Percentage Increase</option>
+                                        <option value="decrease">Percentage Decrease</option>
+                                        <option value="change">Percentage Change</option>
+                                        <option value="tip">Tip Calculator</option>
+                                        <option value="discount">Discount Calculator</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Basic Calculator (What is X% of Y?) -->
+                        <div id="basic-calc" class="calc-section">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Percentage (%):</label>
+                                        <input type="number" id="basic-percent" class="form-control" placeholder="Enter percentage" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Of Number:</label>
+                                        <input type="number" id="basic-number" class="form-control" placeholder="Enter number" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-box mt-3">
+                                <h3>Result: <span id="basic-result">0</span></h3>
+                                <p class="text-muted">Formula: (Percentage × Number) ÷ 100</p>
+                            </div>
+                        </div>
+
+                        <!-- Percentage Of Calculator (X is what percent of Y?) -->
+                        <div id="percentage-of-calc" class="calc-section d-none">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Number:</label>
+                                        <input type="number" id="part-number" class="form-control" placeholder="Enter number" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Total:</label>
+                                        <input type="number" id="total-number" class="form-control" placeholder="Enter total" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-box mt-3">
+                                <h3>Result: <span id="percentage-of-result">0%</span></h3>
+                                <p class="text-muted">Formula: (Number ÷ Total) × 100</p>
+                            </div>
+                        </div>
+
+                        <!-- Percentage Increase Calculator -->
+                        <div id="increase-calc" class="calc-section d-none">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Original Value:</label>
+                                        <input type="number" id="original-value" class="form-control" placeholder="Enter original value" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">New Value:</label>
+                                        <input type="number" id="new-value" class="form-control" placeholder="Enter new value" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-box mt-3">
+                                <h3>Percentage Increase: <span id="increase-result">0%</span></h3>
+                                <p class="text-muted">Formula: ((New Value - Original Value) ÷ Original Value) × 100</p>
+                            </div>
+                        </div>
+
+                        <!-- Percentage Decrease Calculator -->
+                        <div id="decrease-calc" class="calc-section d-none">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Original Value:</label>
+                                        <input type="number" id="decrease-original" class="form-control" placeholder="Enter original value" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">New Value:</label>
+                                        <input type="number" id="decrease-new" class="form-control" placeholder="Enter new value" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-box mt-3">
+                                <h3>Percentage Decrease: <span id="decrease-result">0%</span></h3>
+                                <p class="text-muted">Formula: ((Original Value - New Value) ÷ Original Value) × 100</p>
+                            </div>
+                        </div>
+
+                        <!-- Percentage Change Calculator -->
+                        <div id="change-calc" class="calc-section d-none">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Old Value:</label>
+                                        <input type="number" id="old-value" class="form-control" placeholder="Enter old value" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">New Value:</label>
+                                        <input type="number" id="change-new-value" class="form-control" placeholder="Enter new value" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-box mt-3">
+                                <h3>Percentage Change: <span id="change-result">0%</span></h3>
+                                <p id="change-direction" class="text-muted">Formula: ((New Value - Old Value) ÷ Old Value) × 100</p>
+                            </div>
+                        </div>
+
+                        <!-- Tip Calculator -->
+                        <div id="tip-calc" class="calc-section d-none">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Bill Amount:</label>
+                                        <input type="number" id="bill-amount" class="form-control" placeholder="Enter bill amount" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Tip Percentage (%):</label>
+                                        <input type="number" id="tip-percent" class="form-control" placeholder="Enter tip %" value="15" step="0.1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Number of People:</label>
+                                        <input type="number" id="people-count" class="form-control" placeholder="Enter count" value="1" min="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-box mt-3">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h4>Tip Amount: <span id="tip-amount">$0.00</span></h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4>Total: <span id="total-with-tip">$0.00</span></h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4>Per Person: <span id="per-person">$0.00</span></h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4>Tip Per Person: <span id="tip-per-person">$0.00</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Discount Calculator -->
+                        <div id="discount-calc" class="calc-section d-none">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Original Price:</label>
+                                        <input type="number" id="original-price" class="form-control" placeholder="Enter original price" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Discount Percentage (%):</label>
+                                        <input type="number" id="discount-percent" class="form-control" placeholder="Enter discount %" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-box mt-3">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h4>Discount Amount: <span id="discount-amount">$0.00</span></h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>Final Price: <span id="final-price">$0.00</span></h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>You Save: <span id="savings">$0.00</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="mt-4 text-center">
+                            <button id="clear-all" class="btn btn-secondary me-2">Clear All</button>
+                            <button id="copy-result" class="btn btn-primary">Copy Result</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Use Section -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>How to Use the Percentage Calculator</h2>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li><strong>Select Mode:</strong> Choose the type of percentage calculation you need.</li>
+                            <li><strong>Enter Values:</strong> Input the required numbers in the fields.</li>
+                            <li><strong>View Results:</strong> The calculation updates automatically as you type.</li>
+                            <li><strong>Copy Results:</strong> Use the "Copy Result" button to copy the answer.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Ad Section -->
+                <div class="ad-section ad-sidebar">
+                    <h4>Advertisement</h4>
+                    <div style="background: #f0f0f0; height: 300px; display: flex; align-items: center; justify-content: center; border: 1px dashed #ccc;">
+                        Ad Space - 300x250
+                    </div>
+                </div>
+
+                <!-- Related Tools -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>Related Calculators</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="tip-calculator.html">🧾 Tip Calculator</a></li>
+                            <li class="mb-2"><a href="discount-calculator.html">💸 Discount Calculator</a></li>
+                            <li class="mb-2"><a href="scientific-calculator.html">🧮 Scientific Calculator</a></li>
+                            <li class="mb-2"><a href="bmi-calculator.html">⚖️ BMI Calculator</a></li>
+                            <li class="mb-2"><a href="age-calculator.html">🎂 Age Calculator</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Tips -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>💡 Quick Tips</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Standard Tip:</strong> 15-20% at restaurants</li>
+                            <li><strong>Sales Tax:</strong> Usually 5-10% depending on location</li>
+                            <li><strong>Good Discount:</strong> 20% or more is considered significant</li>
+                            <li><strong>Investment Growth:</strong> 7-10% annually is typical for stocks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calcMode = document.getElementById('calc-mode');
+            const clearBtn = document.getElementById('clear-all');
+            const copyBtn = document.getElementById('copy-result');
+
+            // Show/hide calculator sections based on mode
+            function showCalcSection(mode) {
+                document.querySelectorAll('.calc-section').forEach(section => {
+                    section.classList.add('d-none');
+                });
+                document.getElementById(mode + '-calc').classList.remove('d-none');
+            }
+
+            calcMode.addEventListener('change', function() {
+                showCalcSection(this.value);
+            });
+
+            // Basic Calculator (What is X% of Y?)
+            function calculateBasic() {
+                const percent = parseFloat(document.getElementById('basic-percent').value) || 0;
+                const number = parseFloat(document.getElementById('basic-number').value) || 0;
+                const result = (percent * number) / 100;
+                document.getElementById('basic-result').textContent = result.toFixed(2);
+            }
+
+            document.getElementById('basic-percent').addEventListener('input', calculateBasic);
+            document.getElementById('basic-number').addEventListener('input', calculateBasic);
+
+            // Percentage Of Calculator (X is what percent of Y?)
+            function calculatePercentageOf() {
+                const part = parseFloat(document.getElementById('part-number').value) || 0;
+                const total = parseFloat(document.getElementById('total-number').value) || 0;
+                const result = total !== 0 ? (part / total) * 100 : 0;
+                document.getElementById('percentage-of-result').textContent = result.toFixed(2) + '%';
+            }
+
+            document.getElementById('part-number').addEventListener('input', calculatePercentageOf);
+            document.getElementById('total-number').addEventListener('input', calculatePercentageOf);
+
+            // Percentage Increase Calculator
+            function calculateIncrease() {
+                const original = parseFloat(document.getElementById('original-value').value) || 0;
+                const newVal = parseFloat(document.getElementById('new-value').value) || 0;
+                const result = original !== 0 ? ((newVal - original) / original) * 100 : 0;
+                document.getElementById('increase-result').textContent = result.toFixed(2) + '%';
+            }
+
+            document.getElementById('original-value').addEventListener('input', calculateIncrease);
+            document.getElementById('new-value').addEventListener('input', calculateIncrease);
+
+            // Percentage Decrease Calculator
+            function calculateDecrease() {
+                const original = parseFloat(document.getElementById('decrease-original').value) || 0;
+                const newVal = parseFloat(document.getElementById('decrease-new').value) || 0;
+                const result = original !== 0 ? ((original - newVal) / original) * 100 : 0;
+                document.getElementById('decrease-result').textContent = result.toFixed(2) + '%';
+            }
+
+            document.getElementById('decrease-original').addEventListener('input', calculateDecrease);
+            document.getElementById('decrease-new').addEventListener('input', calculateDecrease);
+
+            // Percentage Change Calculator
+            function calculateChange() {
+                const oldVal = parseFloat(document.getElementById('old-value').value) || 0;
+                const newVal = parseFloat(document.getElementById('change-new-value').value) || 0;
+                const result = oldVal !== 0 ? ((newVal - oldVal) / oldVal) * 100 : 0;
+                document.getElementById('change-result').textContent = result.toFixed(2) + '%';
+                
+                const direction = document.getElementById('change-direction');
+                if (result > 0) {
+                    direction.innerHTML = '<span style="color: green;">↑ Increase</span> - Formula: ((New Value - Old Value) ÷ Old Value) × 100';
+                } else if (result < 0) {
+                    direction.innerHTML = '<span style="color: red;">↓ Decrease</span> - Formula: ((New Value - Old Value) ÷ Old Value) × 100';
+                } else {
+                    direction.innerHTML = '<span style="color: gray;">→ No Change</span> - Formula: ((New Value - Old Value) ÷ Old Value) × 100';
+                }
+            }
+
+            document.getElementById('old-value').addEventListener('input', calculateChange);
+            document.getElementById('change-new-value').addEventListener('input', calculateChange);
+
+            // Tip Calculator
+            function calculateTip() {
+                const billAmount = parseFloat(document.getElementById('bill-amount').value) || 0;
+                const tipPercent = parseFloat(document.getElementById('tip-percent').value) || 0;
+                const peopleCount = parseInt(document.getElementById('people-count').value) || 1;
+
+                const tipAmount = (billAmount * tipPercent) / 100;
+                const totalWithTip = billAmount + tipAmount;
+                const perPerson = totalWithTip / peopleCount;
+                const tipPerPerson = tipAmount / peopleCount;
+
+                document.getElementById('tip-amount').textContent = '$' + tipAmount.toFixed(2);
+                document.getElementById('total-with-tip').textContent = '$' + totalWithTip.toFixed(2);
+                document.getElementById('per-person').textContent = '$' + perPerson.toFixed(2);
+                document.getElementById('tip-per-person').textContent = '$' + tipPerPerson.toFixed(2);
+            }
+
+            document.getElementById('bill-amount').addEventListener('input', calculateTip);
+            document.getElementById('tip-percent').addEventListener('input', calculateTip);
+            document.getElementById('people-count').addEventListener('input', calculateTip);
+
+            // Discount Calculator
+            function calculateDiscount() {
+                const originalPrice = parseFloat(document.getElementById('original-price').value) || 0;
+                const discountPercent = parseFloat(document.getElementById('discount-percent').value) || 0;
+
+                const discountAmount = (originalPrice * discountPercent) / 100;
+                const finalPrice = originalPrice - discountAmount;
+
+                document.getElementById('discount-amount').textContent = '$' + discountAmount.toFixed(2);
+                document.getElementById('final-price').textContent = '$' + finalPrice.toFixed(2);
+                document.getElementById('savings').textContent = '$' + discountAmount.toFixed(2);
+            }
+
+            document.getElementById('original-price').addEventListener('input', calculateDiscount);
+            document.getElementById('discount-percent').addEventListener('input', calculateDiscount);
+
+            // Clear all inputs
+            clearBtn.addEventListener('click', function() {
+                document.querySelectorAll('input[type="number"]').forEach(input => {
+                    if (input.id === 'tip-percent') {
+                        input.value = '15';
+                    } else if (input.id === 'people-count') {
+                        input.value = '1';
+                    } else {
+                        input.value = '';
+                    }
+                });
+                
+                // Recalculate all
+                calculateBasic();
+                calculatePercentageOf();
+                calculateIncrease();
+                calculateDecrease();
+                calculateChange();
+                calculateTip();
+                calculateDiscount();
+            });
+
+            // Copy result
+            copyBtn.addEventListener('click', function() {
+                const activeSection = document.querySelector('.calc-section:not(.d-none)');
+                const resultElement = activeSection.querySelector('[id$="-result"], #tip-amount, #final-price');
+                if (resultElement) {
+                    MultiTools.copyToClipboard(resultElement.textContent);
+                }
+            });
+
+            // Initialize with basic calculator
+            showCalcSection('basic');
+        });
+    </script>
+
+    <style>
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .result-box h3, .result-box h4 {
+            margin-bottom: 10px;
+        }
+        
+        .result-box .text-muted {
+            color: rgba(255,255,255,0.8) !important;
+        }
+    </style>
+</body>
+</html>

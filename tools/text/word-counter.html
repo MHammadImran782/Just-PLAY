@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online word counter tool. Count words, characters, paragraphs, and sentences in your text instantly.">
+    <meta name="keywords" content="word counter, character counter, text analysis, word count tool">
+    <title>Word Counter - Count Words, Characters, and More | Multi-Tools</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="row mt-4">
+            <!-- Main Tool Area -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>📝 Word Counter</h1>
+                        <p>Count words, characters, paragraphs, and sentences in your text</p>
+                    </div>
+                    <div class="card-body">
+                        <!-- Text Input Area -->
+                        <div class="form-group">
+                            <label for="text-input" class="form-label">Enter or paste your text below:</label>
+                            <textarea 
+                                id="text-input" 
+                                class="form-control" 
+                                rows="12" 
+                                placeholder="Start typing or paste your text here..."
+                                style="resize: vertical; min-height: 300px;"
+                            ></textarea>
+                        </div>
+
+                        <!-- Statistics Display -->
+                        <div class="row mt-4">
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #e3f2fd;">
+                                    <div class="card-body">
+                                        <h3 id="word-count" class="mb-1" style="color: #1976d2;">0</h3>
+                                        <small>Words</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #e8f5e8;">
+                                    <div class="card-body">
+                                        <h3 id="char-count" class="mb-1" style="color: #388e3c;">0</h3>
+                                        <small>Characters</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #fff3e0;">
+                                    <div class="card-body">
+                                        <h3 id="char-no-spaces" class="mb-1" style="color: #f57c00;">0</h3>
+                                        <small>Characters (no spaces)</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #fce4ec;">
+                                    <div class="card-body">
+                                        <h3 id="sentence-count" class="mb-1" style="color: #c2185b;">0</h3>
+                                        <small>Sentences</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Statistics -->
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #f3e5f5;">
+                                    <div class="card-body">
+                                        <h3 id="paragraph-count" class="mb-1" style="color: #7b1fa2;">0</h3>
+                                        <small>Paragraphs</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #e0f2f1;">
+                                    <div class="card-body">
+                                        <h3 id="reading-time" class="mb-1" style="color: #00695c;">0</h3>
+                                        <small>Reading Time (min)</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #e8eaf6;">
+                                    <div class="card-body">
+                                        <h3 id="speaking-time" class="mb-1" style="color: #3f51b5;">0</h3>
+                                        <small>Speaking Time (min)</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center" style="background: #efebe9;">
+                                    <div class="card-body">
+                                        <h3 id="avg-words-per-sentence" class="mb-1" style="color: #5d4037;">0</h3>
+                                        <small>Avg Words/Sentence</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="mt-4 text-center">
+                            <button id="clear-text" class="btn btn-secondary me-2">Clear Text</button>
+                            <button id="copy-stats" class="btn btn-primary">Copy Statistics</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Use Section -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>How to Use the Word Counter</h2>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li><strong>Enter Text:</strong> Type or paste your text into the text area above.</li>
+                            <li><strong>Real-time Analysis:</strong> Statistics update automatically as you type.</li>
+                            <li><strong>View Results:</strong> See word count, character count, sentences, paragraphs, and more.</li>
+                            <li><strong>Copy Statistics:</strong> Click "Copy Statistics" to copy the results to your clipboard.</li>
+                            <li><strong>Clear Text:</strong> Use the "Clear Text" button to start over.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>Features</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>✅ Real-time word counting</li>
+                                    <li>✅ Character count with and without spaces</li>
+                                    <li>✅ Sentence and paragraph counting</li>
+                                    <li>✅ Reading time estimation</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>✅ Speaking time calculation</li>
+                                    <li>✅ Average words per sentence</li>
+                                    <li>✅ Mobile-friendly interface</li>
+                                    <li>✅ No data stored or transmitted</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Ad Section -->
+                <div class="ad-section ad-sidebar">
+                    <h4>Advertisement</h4>
+                    <div style="background: #f0f0f0; height: 300px; display: flex; align-items: center; justify-content: center; border: 1px dashed #ccc;">
+                        Ad Space - 300x250
+                    </div>
+                </div>
+
+                <!-- Related Tools -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>Related Text Tools</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="character-counter.html">📊 Character Counter</a></li>
+                            <li class="mb-2"><a href="case-converter.html">🔤 Case Converter</a></li>
+                            <li class="mb-2"><a href="text-to-speech.html">🔊 Text-to-Speech</a></li>
+                            <li class="mb-2"><a href="url-encoder.html">🔗 URL Encoder/Decoder</a></li>
+                            <li class="mb-2"><a href="fancy-text.html">✨ Fancy Text Generator</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tips -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>💡 Tips</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>For academic papers, aim for 15-20 words per sentence</li>
+                            <li>Average reading speed is 200-300 words per minute</li>
+                            <li>Speaking speed averages 150-160 words per minute</li>
+                            <li>Use shorter sentences for better readability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textInput = document.getElementById('text-input');
+            const wordCount = document.getElementById('word-count');
+            const charCount = document.getElementById('char-count');
+            const charNoSpaces = document.getElementById('char-no-spaces');
+            const sentenceCount = document.getElementById('sentence-count');
+            const paragraphCount = document.getElementById('paragraph-count');
+            const readingTime = document.getElementById('reading-time');
+            const speakingTime = document.getElementById('speaking-time');
+            const avgWordsPerSentence = document.getElementById('avg-words-per-sentence');
+            const clearBtn = document.getElementById('clear-text');
+            const copyStatsBtn = document.getElementById('copy-stats');
+
+            function updateStats() {
+                const text = textInput.value;
+                
+                // Word count
+                const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+                wordCount.textContent = words;
+                
+                // Character count
+                charCount.textContent = text.length;
+                charNoSpaces.textContent = text.replace(/\s/g, '').length;
+                
+                // Sentence count
+                const sentences = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+                sentenceCount.textContent = sentences;
+                
+                // Paragraph count
+                const paragraphs = text.trim() === '' ? 0 : text.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
+                paragraphCount.textContent = paragraphs;
+                
+                // Reading time (average 250 words per minute)
+                const readTime = Math.ceil(words / 250);
+                readingTime.textContent = readTime;
+                
+                // Speaking time (average 150 words per minute)
+                const speakTime = Math.ceil(words / 150);
+                speakingTime.textContent = speakTime;
+                
+                // Average words per sentence
+                const avgWords = sentences > 0 ? Math.round(words / sentences) : 0;
+                avgWordsPerSentence.textContent = avgWords;
+            }
+
+            // Update stats on input
+            textInput.addEventListener('input', updateStats);
+            textInput.addEventListener('paste', () => setTimeout(updateStats, 10));
+
+            // Clear text button
+            clearBtn.addEventListener('click', function() {
+                textInput.value = '';
+                updateStats();
+                textInput.focus();
+            });
+
+            // Copy statistics button
+            copyStatsBtn.addEventListener('click', function() {
+                const stats = `Text Statistics:
+Words: ${wordCount.textContent}
+Characters: ${charCount.textContent}
+Characters (no spaces): ${charNoSpaces.textContent}
+Sentences: ${sentenceCount.textContent}
+Paragraphs: ${paragraphCount.textContent}
+Reading Time: ${readingTime.textContent} minutes
+Speaking Time: ${speakingTime.textContent} minutes
+Average Words per Sentence: ${avgWordsPerSentence.textContent}`;
+
+                MultiTools.copyToClipboard(stats);
+            });
+
+            // Initial update
+            updateStats();
+        });
+    </script>
+</body>
+</html>

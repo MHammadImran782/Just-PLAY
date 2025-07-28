@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online JSON formatter and validator. Format, validate, and beautify JSON data with syntax highlighting.">
+    <meta name="keywords" content="JSON formatter, JSON validator, JSON beautifier, JSON minifier, JSON parser">
+    <title>JSON Formatter & Validator - Format and Validate JSON | Multi-Tools</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="row mt-4">
+            <!-- Main Tool Area -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>📋 JSON Formatter & Validator</h1>
+                        <p>Format, validate, and beautify JSON data with syntax highlighting</p>
+                    </div>
+                    <div class="card-body">
+                        <!-- Input Section -->
+                        <div class="form-group">
+                            <label for="json-input" class="form-label">Paste your JSON here:</label>
+                            <textarea 
+                                id="json-input" 
+                                class="form-control" 
+                                rows="12" 
+                                placeholder='{"name": "John", "age": 30, "city": "New York"}'
+                                style="font-family: 'Courier New', monospace; font-size: 14px;"
+                            ></textarea>
+                        </div>
+
+                        <!-- Control Buttons -->
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-8">
+                                <div class="btn-group" role="group">
+                                    <button id="format-btn" class="btn btn-primary">Format JSON</button>
+                                    <button id="minify-btn" class="btn btn-secondary">Minify JSON</button>
+                                    <button id="validate-btn" class="btn btn-success">Validate</button>
+                                    <button id="clear-btn" class="btn btn-danger">Clear</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <label for="indent-size" class="form-label me-2">Indent:</label>
+                                <select id="indent-size" class="form-select d-inline-block" style="width: auto;">
+                                    <option value="2">2 spaces</option>
+                                    <option value="4" selected>4 spaces</option>
+                                    <option value="tab">Tab</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Status Section -->
+                        <div id="status-section" class="mb-3">
+                            <div id="status-message" class="alert d-none"></div>
+                        </div>
+
+                        <!-- Output Section -->
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label for="json-output" class="form-label">Formatted JSON:</label>
+                                <button id="copy-output" class="btn btn-sm btn-outline-primary">Copy Output</button>
+                            </div>
+                            <textarea 
+                                id="json-output" 
+                                class="form-control" 
+                                rows="12" 
+                                readonly
+                                style="font-family: 'Courier New', monospace; font-size: 14px; background-color: #f8f9fa;"
+                            ></textarea>
+                        </div>
+
+                        <!-- JSON Statistics -->
+                        <div id="json-stats" class="row mt-3 d-none">
+                            <div class="col-md-3">
+                                <div class="card text-center" style="background: #e3f2fd;">
+                                    <div class="card-body p-2">
+                                        <h5 id="char-count" class="mb-1" style="color: #1976d2;">0</h5>
+                                        <small>Characters</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card text-center" style="background: #e8f5e8;">
+                                    <div class="card-body p-2">
+                                        <h5 id="line-count" class="mb-1" style="color: #388e3c;">0</h5>
+                                        <small>Lines</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card text-center" style="background: #fff3e0;">
+                                    <div class="card-body p-2">
+                                        <h5 id="size-bytes" class="mb-1" style="color: #f57c00;">0</h5>
+                                        <small>Bytes</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card text-center" style="background: #fce4ec;">
+                                    <div class="card-body p-2">
+                                        <h5 id="object-count" class="mb-1" style="color: #c2185b;">0</h5>
+                                        <small>Objects</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample JSON Templates -->
+                        <div class="mt-4">
+                            <h4>Sample JSON Templates:</h4>
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <button class="btn btn-outline-secondary btn-sm w-100" onclick="loadSample('person')">Person Object</button>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <button class="btn btn-outline-secondary btn-sm w-100" onclick="loadSample('array')">Array Example</button>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <button class="btn btn-outline-secondary btn-sm w-100" onclick="loadSample('nested')">Nested Object</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>Features</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>✅ Format and beautify JSON</li>
+                                    <li>✅ Minify JSON (remove whitespace)</li>
+                                    <li>✅ Validate JSON syntax</li>
+                                    <li>✅ Detailed error messages</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>✅ Customizable indentation</li>
+                                    <li>✅ JSON statistics</li>
+                                    <li>✅ Sample templates</li>
+                                    <li>✅ Copy to clipboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Use Section -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>How to Use the JSON Formatter</h2>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li><strong>Paste JSON:</strong> Copy and paste your JSON data into the input field.</li>
+                            <li><strong>Format:</strong> Click "Format JSON" to beautify and indent your JSON.</li>
+                            <li><strong>Validate:</strong> Click "Validate" to check for syntax errors.</li>
+                            <li><strong>Minify:</strong> Use "Minify JSON" to remove all unnecessary whitespace.</li>
+                            <li><strong>Copy:</strong> Click "Copy Output" to copy the formatted JSON to your clipboard.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Ad Section -->
+                <div class="ad-section ad-sidebar">
+                    <h4>Advertisement</h4>
+                    <div style="background: #f0f0f0; height: 300px; display: flex; align-items: center; justify-content: center; border: 1px dashed #ccc;">
+                        Ad Space - 300x250
+                    </div>
+                </div>
+
+                <!-- Related Tools -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>Related Developer Tools</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="html-to-markdown.html">📝 HTML to Markdown</a></li>
+                            <li class="mb-2"><a href="css-minifier.html">🗜️ CSS Minifier</a></li>
+                            <li class="mb-2"><a href="js-minifier.html">⚡ JavaScript Minifier</a></li>
+                            <li class="mb-2"><a href="base64-converter.html">🔐 Base64 Converter</a></li>
+                            <li class="mb-2"><a href="color-picker.html">🎨 Color Picker</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- JSON Tips -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>💡 JSON Tips</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Strings:</strong> Must be in double quotes</li>
+                            <li><strong>Numbers:</strong> No leading zeros allowed</li>
+                            <li><strong>Booleans:</strong> Use true/false (lowercase)</li>
+                            <li><strong>Null:</strong> Use null (lowercase)</li>
+                            <li><strong>Arrays:</strong> Use square brackets []</li>
+                            <li><strong>Objects:</strong> Use curly braces {}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const jsonInput = document.getElementById('json-input');
+            const jsonOutput = document.getElementById('json-output');
+            const formatBtn = document.getElementById('format-btn');
+            const minifyBtn = document.getElementById('minify-btn');
+            const validateBtn = document.getElementById('validate-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const copyBtn = document.getElementById('copy-output');
+            const indentSize = document.getElementById('indent-size');
+            const statusSection = document.getElementById('status-section');
+            const statusMessage = document.getElementById('status-message');
+            const jsonStats = document.getElementById('json-stats');
+
+            // Sample JSON templates
+            const samples = {
+                person: {
+                    "name": "John Doe",
+                    "age": 30,
+                    "email": "john.doe@example.com",
+                    "address": {
+                        "street": "123 Main St",
+                        "city": "New York",
+                        "zipCode": "10001"
+                    },
+                    "hobbies": ["reading", "swimming", "coding"]
+                },
+                array: [
+                    {"id": 1, "name": "Apple", "price": 1.99},
+                    {"id": 2, "name": "Banana", "price": 0.99},
+                    {"id": 3, "name": "Orange", "price": 2.49}
+                ],
+                nested: {
+                    "company": "Tech Corp",
+                    "employees": [
+                        {
+                            "id": 1,
+                            "name": "Alice Johnson",
+                            "position": "Developer",
+                            "skills": ["JavaScript", "Python", "React"],
+                            "contact": {
+                                "email": "alice@techcorp.com",
+                                "phone": "+1-555-0101"
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "name": "Bob Smith",
+                            "position": "Designer",
+                            "skills": ["Photoshop", "Figma", "CSS"],
+                            "contact": {
+                                "email": "bob@techcorp.com",
+                                "phone": "+1-555-0102"
+                            }
+                        }
+                    ]
+                }
+            };
+
+            function showStatus(message, type) {
+                statusMessage.textContent = message;
+                statusMessage.className = `alert alert-${type}`;
+                statusMessage.classList.remove('d-none');
+                statusSection.style.display = 'block';
+            }
+
+            function hideStatus() {
+                statusMessage.classList.add('d-none');
+                statusSection.style.display = 'none';
+            }
+
+            function getIndentation() {
+                const value = indentSize.value;
+                return value === 'tab' ? '\t' : parseInt(value);
+            }
+
+            function updateStats(jsonString) {
+                if (!jsonString) {
+                    jsonStats.classList.add('d-none');
+                    return;
+                }
+
+                const charCount = jsonString.length;
+                const lineCount = jsonString.split('\n').length;
+                const sizeBytes = new Blob([jsonString]).size;
+                
+                // Count objects (rough estimate)
+                const objectCount = (jsonString.match(/\{/g) || []).length;
+
+                document.getElementById('char-count').textContent = charCount.toLocaleString();
+                document.getElementById('line-count').textContent = lineCount.toLocaleString();
+                document.getElementById('size-bytes').textContent = sizeBytes.toLocaleString();
+                document.getElementById('object-count').textContent = objectCount.toLocaleString();
+
+                jsonStats.classList.remove('d-none');
+            }
+
+            function formatJSON() {
+                const input = jsonInput.value.trim();
+                if (!input) {
+                    showStatus('Please enter JSON data to format', 'warning');
+                    return;
+                }
+
+                try {
+                    const parsed = JSON.parse(input);
+                    const formatted = JSON.stringify(parsed, null, getIndentation());
+                    jsonOutput.value = formatted;
+                    showStatus('JSON formatted successfully!', 'success');
+                    updateStats(formatted);
+                } catch (error) {
+                    showStatus('Invalid JSON: ' + error.message, 'danger');
+                    jsonOutput.value = '';
+                    jsonStats.classList.add('d-none');
+                }
+            }
+
+            function minifyJSON() {
+                const input = jsonInput.value.trim();
+                if (!input) {
+                    showStatus('Please enter JSON data to minify', 'warning');
+                    return;
+                }
+
+                try {
+                    const parsed = JSON.parse(input);
+                    const minified = JSON.stringify(parsed);
+                    jsonOutput.value = minified;
+                    showStatus('JSON minified successfully!', 'success');
+                    updateStats(minified);
+                } catch (error) {
+                    showStatus('Invalid JSON: ' + error.message, 'danger');
+                    jsonOutput.value = '';
+                    jsonStats.classList.add('d-none');
+                }
+            }
+
+            function validateJSON() {
+                const input = jsonInput.value.trim();
+                if (!input) {
+                    showStatus('Please enter JSON data to validate', 'warning');
+                    return;
+                }
+
+                try {
+                    JSON.parse(input);
+                    showStatus('✅ Valid JSON!', 'success');
+                } catch (error) {
+                    const errorMsg = error.message;
+                    const match = errorMsg.match(/position (\d+)/);
+                    if (match) {
+                        const position = parseInt(match[1]);
+                        const lines = input.substring(0, position).split('\n');
+                        const line = lines.length;
+                        const column = lines[lines.length - 1].length + 1;
+                        showStatus(`❌ Invalid JSON at line ${line}, column ${column}: ${errorMsg}`, 'danger');
+                    } else {
+                        showStatus('❌ Invalid JSON: ' + errorMsg, 'danger');
+                    }
+                }
+            }
+
+            function clearAll() {
+                jsonInput.value = '';
+                jsonOutput.value = '';
+                hideStatus();
+                jsonStats.classList.add('d-none');
+                jsonInput.focus();
+            }
+
+            function copyOutput() {
+                if (!jsonOutput.value) {
+                    showStatus('No output to copy', 'warning');
+                    return;
+                }
+                MultiTools.copyToClipboard(jsonOutput.value);
+            }
+
+            // Global function for sample loading
+            window.loadSample = function(type) {
+                if (samples[type]) {
+                    jsonInput.value = JSON.stringify(samples[type], null, 2);
+                    hideStatus();
+                    jsonStats.classList.add('d-none');
+                    jsonOutput.value = '';
+                }
+            };
+
+            // Event listeners
+            formatBtn.addEventListener('click', formatJSON);
+            minifyBtn.addEventListener('click', minifyJSON);
+            validateBtn.addEventListener('click', validateJSON);
+            clearBtn.addEventListener('click', clearAll);
+            copyBtn.addEventListener('click', copyOutput);
+
+            // Auto-format on paste (with delay)
+            jsonInput.addEventListener('paste', function() {
+                setTimeout(() => {
+                    if (jsonInput.value.trim()) {
+                        formatJSON();
+                    }
+                }, 100);
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 'Enter':
+                            e.preventDefault();
+                            formatJSON();
+                            break;
+                        case 'm':
+                            if (e.shiftKey) {
+                                e.preventDefault();
+                                minifyJSON();
+                            }
+                            break;
+                    }
+                }
+            });
+
+            // Initialize
+            hideStatus();
+        });
+    </script>
+
+    <style>
+        .btn-group .btn {
+            margin-right: 0;
+        }
+        
+        .btn-group .btn:not(:last-child) {
+            border-right: none;
+        }
+        
+        .btn-group .btn:not(:first-child) {
+            border-left: none;
+        }
+        
+        textarea {
+            border-radius: 8px;
+        }
+        
+        .card-body .btn-group {
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn-group .btn {
+                border-radius: 0.375rem !important;
+                margin-bottom: 0.5rem;
+                border: 1px solid;
+            }
+        }
+    </style>
+</body>
+</html>
